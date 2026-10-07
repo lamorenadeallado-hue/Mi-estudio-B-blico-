@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eef0e7">
+<title>Mi estudio bíblico</title>
+<style>
+:root{
+  --ink:#24352f; --muted:#65716c; --paper:#f8f6f0; --card:#fffdf8;
+  --green:#57796a; --green2:#dfe9e1; --pink:#ead7dc; --gold:#dfcda7; --blue:#d9e6eb;
+  --shadow:0 8px 25px rgba(45,55,50,.08); --radius:22px;
+}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(#f6f3eb,#eef0e7);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+button,input,textarea{font:inherit} button{cursor:pointer}
+.hero{min-height:390px;padding:34px 6vw 45px;display:flex;flex-direction:column;justify-content:flex-end;background:
+linear-gradient(90deg,rgba(248,246,240,.96),rgba(248,246,240,.45)),
+radial-gradient(circle at 78% 24%,#fff4d2 0 10%,transparent 28%),
+linear-gradient(145deg,#dce7df,#e9dfcf 55%,#bfcfbe);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-8%;bottom:-35%;width:65%;height:90%;border-radius:50%;background:rgba(113,137,113,.16)}
+.top{position:absolute;top:24px;right:5vw;display:flex;gap:10px;z-index:2}.round{width:54px;height:54px;border:0;border-radius:17px;background:#fffdf8dd;box-shadow:var(--shadow);font-size:25px}
+.logo{font-size:42px;margin-bottom:8px}.title{font-size:clamp(40px,7vw,72px);line-height:.98;margin:0;max-width:850px;font-weight:500;letter-spacing:-2px}.quote{font-size:23px;line-height:1.35;max-width:650px;margin:20px 0 5px}.ref{letter-spacing:5px;font-size:13px}
+main{max-width:1250px;margin:-35px auto 60px;padding:0 20px;position:relative}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tile{min-height:175px;border:1px solid #ffffffb8;border-radius:var(--radius);padding:25px;background:var(--card);box-shadow:var(--shadow);transition:.2s}.tile:hover{transform:translateY(-2px)}
+.icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:24px;margin-bottom:18px}.tile:nth-child(3n+1) .icon{background:#dbe8dd}.tile:nth-child(3n+2) .icon{background:var(--pink)}.tile:nth-child(3n) .icon{background:var(--blue)}
+.tile h2{margin:0 0 5px;font-size:25px}.tile p{margin:0;color:var(--muted);font-family:Arial,sans-serif;font-size:15px}
+.section{margin-top:24px;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px}.panel{background:#fffdf8e8;border:1px solid #fff;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}.panel h3{margin:0 0 12px;font-size:22px}.small{font-family:Arial,sans-serif;color:var(--muted);font-size:14px}.daily{font-size:20px;line-height:1.45;text-align:center;background:#f3eee5;border-radius:16px;padding:18px;margin:15px 0}.btn{width:100%;border:0;border-radius:14px;padding:13px 16px;background:var(--green);color:white;font-family:Arial,sans-serif;font-weight:600}.btn.secondary{background:#e4ebe5;color:var(--ink)}
+.notes{margin-top:24px}.notes-head{display:flex;justify-content:space-between;align-items:center}.notes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.note{padding:16px;border:1px solid #e5e1d8;border-radius:16px;background:#fffaf3}.note b{font-size:15px}.note p{font-family:Arial,sans-serif;font-size:13px;color:var(--muted);margin:8px 0 0}.empty{color:var(--muted);font-family:Arial,sans-serif;padding:10px 0}
+.modal{position:fixed;inset:0;background:#17231f77;display:none;place-items:center;padding:20px;z-index:10}.modal.open{display:grid}.dialog{width:min(650px,100%);background:var(--card);border-radius:24px;padding:25px;box-shadow:0 20px 60px #0003}.dialog h2{margin-top:0}.dialog textarea{width:100%;min-height:180px;border:1px solid #ddd6ca;border-radius:14px;padding:14px;resize:vertical}.actions{display:flex;gap:10px;margin-top:12px}.actions button{flex:1;border:0;border-radius:12px;padding:12px}.close{background:#eee9df}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.section{grid-template-columns:1fr 1fr}.notes-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.hero{min-height:330px;padding:25px 22px 36px}.title{font-size:45px}.quote{font-size:18px}.grid,.section,.notes-grid{grid-template-columns:1fr}.tile{min-height:130px}.logo{font-size:32px}main{padding:0 12px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="top"><button class="round" onclick="openSearch()" aria-label="Buscar">⌕</button><button class="round" onclick="openMenu()" aria-label="Menú">☰</button></div>
+  <div class="logo">📖</div>
+  <h1 class="title">Mi estudio bíblico</h1>
+  <div class="quote">“Acérquense a Dios, y él se acercará a ustedes”.</div><div class="ref">SANTIAGO 4:8</div>
+</header>
+<main>
+  <section class="grid">
+    <div class="tile" onclick="show('Texto diario')"><div class="icon">🗓️</div><h2>Texto diario</h2><p>Reflexiona cada día</p></div>
+    <div class="tile" onclick="show('La Atalaya')"><div class="icon">📕</div><h2>La Atalaya</h2><p>Estudios y análisis</p></div>
+    <div class="tile" onclick="show('Estudio de la Biblia')"><div class="icon">📖</div><h2>Estudio de la Biblia</h2><p>Capítulos, temas y preguntas</p></div>
+    <div class="tile" onclick="show('Perlas espirituales')"><div class="icon">💎</div><h2>Perlas espirituales</h2><p>Ideas y lecciones para aplicar</p></div>
+    <div class="tile" onclick="newNote()"><div class="icon">✎</div><h2>Mis comentarios</h2><p>Preparación de comentarios de 30 segundos</p></div>
+    <div class="tile" onclick="show('Reuniones')"><div class="icon">👥</div><h2>Reuniones</h2><p>Entre semana y fin de semana</p></div>
+    <div class="tile" onclick="show('Mis textos favoritos')"><div class="icon">♡</div><h2>Mis textos favoritos</h2><p>Versículos que me animan</p></div>
+    <div class="tile" onclick="openSearch()"><div class="icon">⌕</div><h2>Buscar</h2><p>Textos, temas y contenido</p></div>
+    <div class="tile" onclick="show('Mis notas y ajustes')"><div class="icon">⚙</div><h2>Mis notas y ajustes</h2><p>Organiza tu estudio</p></div>
+  </section>
+
+  <section class="section">
+    <article class="panel"><h3>🗓️ Texto diario de hoy</h3><div class="small" id="today"></div><div class="daily">“El que habita al amparo del Altísimo residirá a la sombra del Todopoderoso”.<br><small>SALMO 91:1</small></div><button class="btn" onclick="show('Texto diario')">Leer el texto diario →</button></article>
+    <article class="panel"><h3>📖 Estudio actual</h3><p><b>No creamos las mentiras de Satanás y confiemos en Jehová y Jesús</b></p><p class="small">Estudio de agosto de 2026</p><button class="btn secondary" onclick="show('La Atalaya')">Continuar estudio →</button></article>
+    <article class="panel"><h3>📖 Capítulo de la Biblia</h3><p><b>Jeremías 41</b></p><p class="small">Resumen, lecciones y aplicación</p><button class="btn secondary" onclick="show('Jeremías 41')">Ver capítulo →</button></article>
+  </section>
+
+  <section class="panel notes"><div class="notes-head"><h3>📝 Mis últimas notas</h3><button class="btn secondary" style="width:auto" onclick="newNote()">+ Añadir</button></div><div id="notes" class="notes-grid"></div></section>
+</main>
+
+<div class="modal" id="modal"><div class="dialog"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="actions"><button class="close" onclick="closeModal()">Cerrar</button><button class="btn" onclick="closeModal()">Aceptar</button></div></div></div>
+
+<script>
+const key='mi_estudio_biblico_notas';
+function notes(){try{return JSON.parse(localStorage.getItem(key)||'[]')}catch(e){return[]}}
+function render(){const d=new Date();document.getElementById('today').textContent=d.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});const box=document.getElementById('notes'), ns=notes();box.innerHTML=ns.length?ns.slice(-4).reverse().map(n=>`<div class="note"><b>${esc(n.title)}</b><p>${esc(n.text).slice(0,120)}${n.text.length>120?'…':''}</p></div>`).join(''):'<div class="empty">Todavía no tienes notas. Pulsa “+ Añadir” para crear la primera.</div>'}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function newNote(){document.getElementById('modalTitle').textContent='Nueva nota';document.getElementById('modalBody').innerHTML='<input id="nt" placeholder="Título" style="width:100%;padding:13px;border:1px solid #ddd6ca;border-radius:12px;margin-bottom:10px"><textarea id="nb" placeholder="Escribe aquí tu comentario, idea o reflexión..."></textarea>';document.querySelector('#modal .btn').onclick=saveNote;document.getElementById('modal').classList.add('open')}
+function saveNote(){const t=document.getElementById('nt').value.trim()||'Mi nota';const b=document.getElementById('nb').value.trim();if(!b)return;const ns=notes();ns.push({title:t,text:b,date:new Date().toISOString()});localStorage.setItem(key,JSON.stringify(ns));closeModal();render()}
+function show(title){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML='<p class="small">Esta sección ya está preparada en el diseño. Podemos ir añadiendo aquí el contenido, tus notas, preguntas, textos bíblicos y estudios.</p>';document.querySelector('#modal .btn').onclick=closeModal;document.getElementById('modal').classList.add('open')}
+function openSearch(){document.getElementById('modalTitle').textContent='Buscar';document.getElementById('modalBody').innerHTML='<input id="search" placeholder="Escribe un tema, texto o palabra…" style="width:100%;padding:14px;border:1px solid #ddd6ca;border-radius:12px"><p class="small">En la siguiente versión podemos hacer que busque dentro de todos tus estudios y notas.</p>';document.querySelector('#modal .btn').onclick=closeModal;document.getElementById('modal').classList.add('open')}
+function openMenu(){show('Menú')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+render();
+</script>
+</body>
+</html>
